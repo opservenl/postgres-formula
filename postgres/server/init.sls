@@ -118,7 +118,8 @@ postgresql-config-dir:
 postgresql-conf-comment-port:
   file.comment:
     - name: {{ postgres.conf_dir }}/postgresql.conf
-    - regex: ^port\s*=.+
+    - regex: ^port\s*=((?!\b{{ db_port }}\b).)+$
+    - onlyif: 'grep -qP "^port\s*=((?!\b{{ db_port }}\b).)+$" "{{ postgres.conf_dir }}/postgresql.conf"'
     - require:
       - file: postgresql-config-dir
 
