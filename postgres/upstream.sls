@@ -4,6 +4,7 @@
 {% set pg_common_version = salt['pkg.version']('postgresql-common') %}
 
 {%- if 'pkg_repo' in postgres -%}
+{% set pg_common_version = salt['pkg.version']('postgresql-common') %}
 
   {%- if postgres.use_upstream_repo == true -%}
 
@@ -34,6 +35,7 @@ postgresql-repo-keyring:
     - require_in:
       - pkgrepo: postgresql-repo
   {%- endif %}      
+  {%- endif %}
   {%- endif %}
 
 postgresql-repo:
