@@ -36,7 +36,6 @@ postgresql-repo-keyring:
       - pkgrepo: postgresql-repo
   {%- endif %}      
   {%- endif %}
-  {%- endif %}
 
 postgresql-repo:
   pkgrepo.managed:
@@ -62,7 +61,7 @@ postgresql-repo-keyring:
 
   {%- endif -%}
 
-{%- elif grains.os not in ('Windows', 'MacOS',) %}
+{%- if grains.os not in ('Windows', 'MacOS',) %}
 
 postgresql-repo:
   test.show_notification:
