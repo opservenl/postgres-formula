@@ -25,18 +25,6 @@ postgresql-pkg-deps:
   pkg.installed:
     - pkgs: {{ postgres.pkgs_deps | json }}
 
-# Add upstream repository for your distro
-  {% if grains.os_family == 'Debian' %}
-  {% if salt['pkg.version_cmp'](pg_common_version, '246') <= 0 %}
-postgresql-repo-keyring:
-  pkg.installed:
-    - sources:
-      - pgdg-keyring: {{ postgres.pkg_repo_keyring }}
-    - require_in:
-      - pkgrepo: postgresql-repo
-  {%- endif %}      
-  {%- endif %}
-
 postgresql-repo:
   pkgrepo.managed:
     {{- format_kwargs(postgres.pkg_repo) }}
