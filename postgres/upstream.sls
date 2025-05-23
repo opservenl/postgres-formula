@@ -21,6 +21,11 @@ postgresql-profile:
         bin_dir: {{ postgres.bin_dir }}
     {%- endif %}
 
+postgresql-key:
+  cmd.run:
+    - name: curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmor -o /usr/share/keyrings/postgresql.gpg
+    - creates: /usr/share/keyrings/postgresql.gpg
+
 postgresql-pkg-deps:
   pkg.installed:
     - pkgs: {{ postgres.pkgs_deps | json }}
